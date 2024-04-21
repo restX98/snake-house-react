@@ -1,0 +1,19 @@
+{
+  "name": "snake-house-react",
+  "version": "0.1.0",
+  "description": "Snake House - An interactive background home of a small hungry snake",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/restX98/snake-house-react.git"
+  },
+  "author": "restX98",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/restX98/snake-house-react/issues"
+  },
+  "homepage": "https://github.com/restX98/snake-house-react#readme"
+}
