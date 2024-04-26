@@ -1,19 +1,16 @@
 {
-  "name": "snake-house-react",
-  "version": "0.1.0",
-  "description": "Snake House - An interactive background home of a small hungry snake",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/restX98/snake-house-react.git"
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5",
+    "turbo": "latest"
   },
-  "author": "restX98",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/restX98/snake-house-react/issues"
-  },
-  "homepage": "https://github.com/restX98/snake-house-react#readme"
+  "packageManager": "pnpm@8.9.0"
 }
