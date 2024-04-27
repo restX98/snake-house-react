@@ -18,7 +18,7 @@ importers:
         specifier: latest
         version: 1.13.3
 
-  snake-house-react:
+  package:
     dependencies:
       clsx:
         specifier: ^2.1.1
@@ -97,8 +97,8 @@ importers:
   web:
     dependencies:
       '@restx98/snake-house-react':
-        specifier: snake-house-react
-        version: link:../snake-house-react
+        specifier: package
+        version: link:../package
       next:
         specifier: ^14.1.1
         version: 14.2.3(react-dom@18.3.1)(react@18.3.1)
