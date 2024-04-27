@@ -9,15 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@restx98/snake-house-react": "workspace:*",
+    "@restx98/snake-house-react": "snake-house-react",
     "next": "^14.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.1.1",
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
     "@types/node": "^20.11.24",
     "@types/react": "^18.2.61",
     "@types/react-dom": "^18.2.19",
