@@ -1,6 +1,6 @@
 "use client";
 
-import "./style/tailwind.css";
+import "@/style/tailwind.css";
 
 // components
 export { default as SnakeHouse } from "@/components/SnakeHouse";
