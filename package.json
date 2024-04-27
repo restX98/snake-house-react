@@ -4,8 +4,10 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
+    "clean": "turbo clean && rimraf .turbo node_modules",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{js,jsx,cjs,mjs,ts,tsx}\""
+    "format": "turbo format",
+    "format:check": "turbo format:check"
   },
   "devDependencies": {
     "eslint": "^8.57.0",

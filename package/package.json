@@ -19,9 +19,12 @@
     "dist"
   ],
   "scripts": {
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "build": "rollup --config",
-    "dev": "pnpm build --watch"
+    "dev": "pnpm build --watch",
+    "clean": "rimraf .turbo dist node_modules",
+    "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check"
   },
   "peerDependencies": {
     "react": "^18.2.0",
@@ -45,7 +48,7 @@
     "postcss": "^8",
     "rollup": "^4.16.4",
     "rollup-plugin-postcss": "^4.0.2",
-    "rollup-plugin-use-client": "^1.4.0"    
+    "rollup-plugin-use-client": "^1.4.0"
   },
   "dependencies": {
     "clsx": "^2.1.1",
