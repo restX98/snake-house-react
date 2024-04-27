@@ -5,7 +5,7 @@ function BoxContainer({ children }) {
         {children}
       </div>
     </div>
-  )
+  );
 }
 
-export default BoxContainer
+export default BoxContainer;

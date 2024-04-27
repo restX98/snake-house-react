@@ -1,9 +1,9 @@
-'use client'
+"use client";
 
-import './style/tailwind.css'
+import "./style/tailwind.css";
 
 // components
-export { default as SnakeHouse } from '@/components/SnakeHouse'
+export { default as SnakeHouse } from "@/components/SnakeHouse";
 
 // contexts
-export * from '@/context/snake-game-context'
+export * from "@/context/snake-game-context";

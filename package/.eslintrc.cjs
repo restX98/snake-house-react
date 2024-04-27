@@ -7,27 +7,31 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
-    'plugin:react-hooks/recommended',
-    'plugin:tailwindcss/recommended',
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
+    "plugin:react-hooks/recommended",
+    "plugin:tailwindcss/recommended",
+    "prettier",
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  ignorePatterns: ["dist"],
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-  },
-  settings: {
-    react: { version: 'detect' },
-    tailwindcss: {
-      callees: ['twMerge', 'createTheme'],
-      classRegex: '^(class(Name)|theme)?$',
+    ecmaVersion: "latest",
+    sourceType: "module",
+    ecmaFeatures: {
+      jsx: true,
     },
   },
-  plugins: ['react'],
-  rules: {
-    'react/prop-types': ['off'],
-    'no-undef': 'off',
+  settings: {
+    react: { version: "detect" },
+    tailwindcss: {
+      callees: ["cn"],
+      classRegex: "^(class(Name))?$",
+    },
   },
-}
+  plugins: ["react"],
+  rules: {
+    "react/prop-types": ["off"],
+    "no-undef": "off",
+  },
+};

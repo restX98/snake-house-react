@@ -1,21 +1,17 @@
-import { rimraf } from 'rimraf'
-import { rollupPluginUseClient } from 'rollup-plugin-use-client'
-import alias from '@rollup/plugin-alias'
-import path from 'path'
-import babel from '@rollup/plugin-babel'
-import resolve from '@rollup/plugin-node-resolve'
-import terser from '@rollup/plugin-terser'
+import path from "path";
+
+import alias from "@rollup/plugin-alias";
+import babel from "@rollup/plugin-babel";
+import resolve from "@rollup/plugin-node-resolve";
+import terser from "@rollup/plugin-terser";
 import postcss from "rollup-plugin-postcss";
+import { rollupPluginUseClient } from "rollup-plugin-use-client";
+import { rimraf } from "rimraf";
 
-const entries = ['src/index.js']
-const outputDir = 'dist'
+const entries = ["src/index.js"];
+const outputDir = "dist";
 
-const external = [
-  'react/jsx-runtime',
-  'react',
-  'react-dom',
-  'tailwindcss',
-]
+const external = ["react/jsx-runtime", "react", "react-dom", "tailwindcss"];
 
 /**
  * @type {import('rollup').RollupOptions}
@@ -24,15 +20,15 @@ export default {
   input: entries,
   output: [
     {
-      format: 'es',
+      format: "es",
       dir: `${outputDir}/esm`,
-      entryFileNames: '[name].mjs',
+      entryFileNames: "[name].mjs",
       sourcemap: true,
     },
     {
-      format: 'cjs',
+      format: "cjs",
       dir: `${outputDir}/cjs`,
-      entryFileNames: '[name].cjs',
+      entryFileNames: "[name].cjs",
       sourcemap: true,
     },
   ],
@@ -42,15 +38,15 @@ export default {
     alias({
       entries: [
         {
-          find: '@',
-          replacement: path.resolve('src'),
+          find: "@",
+          replacement: path.resolve("src"),
         },
       ],
     }),
     resolve({
       browser: true,
       preferBuiltins: false,
-      extensions: ['.js', '.jsx', '.json'],
+      extensions: [".js", ".jsx", ".json"],
     }),
     postcss({
       config: {
@@ -63,32 +59,35 @@ export default {
       },
     }),
     babel({
-      babelHelpers: 'bundled',
+      babelHelpers: "bundled",
       presets: [
-        '@babel/preset-env',
-        ['@babel/preset-react', {
-          'runtime': 'automatic',
-        }],
+        "@babel/preset-env",
+        [
+          "@babel/preset-react",
+          {
+            runtime: "automatic",
+          },
+        ],
       ],
-      extensions: ['.js', '.jsx', '.json', 'css', 'mjs'],
-      exclude: 'node_modules/**',
+      extensions: [".js", ".jsx", ".json", "css", "mjs"],
+      exclude: "node_modules/**",
     }),
     rollupPluginUseClient(),
     terser(),
   ],
   onwarn(warning, warn) {
-    if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
-      return
+    if (warning.code === "MODULE_LEVEL_DIRECTIVE") {
+      return;
     }
-    warn(warning)
+    warn(warning);
   },
-}
+};
 
 function cleanOutputDir() {
   return {
-    name: 'clean-output-dir',
+    name: "clean-output-dir",
     async buildStart() {
-      await rimraf(outputDir)
+      await rimraf(outputDir);
     },
-  }
+  };
 }
