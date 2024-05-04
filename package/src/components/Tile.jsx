@@ -5,7 +5,7 @@ import { useSnakeGameContext } from "@/context/snake-game-context";
 import { cn } from "@/lib/utils";
 
 function Tile({ coords }) {
-  const { snake, foods, addFood } = useSnakeGameContext();
+  const { snake, foods, placeFood } = useSnakeGameContext();
   const [isSnake, setIsSnake] = useState(false);
   const [isFood, setIsFood] = useState(false);
 
@@ -25,18 +25,18 @@ function Tile({ coords }) {
 
   return (
     <div
-      onClick={() => addFood({ x: coords.col, y: coords.row })}
-      className={cn("h-10 w-10 p-1", isSnake && isFood ? "p-px" : "p-1")}
+      onClick={() => placeFood({ x: coords.col, y: coords.row })}
+      className={cn("size-10 p-1", isSnake && isFood ? "p-px" : "p-1")}
     >
       <div
         className={cn(
-          "h-full w-full rounded-sm p-px",
+          "size-full rounded-sm p-px",
           isSnake ? "bg-green-700" : isFood ? "bg-red-700" : "bg-zinc-900",
         )}
       >
         <div
           className={cn(
-            "h-full w-full rounded-sm",
+            "size-full rounded-sm",
             isSnake
               ? "bg-tile-snake shadow-tile-snake"
               : isFood
