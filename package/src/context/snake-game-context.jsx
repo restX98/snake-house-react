@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext } from "react";
 import { useInterval } from "@/hooks/use-interval";
 import { useGrid } from "@/hooks/use-grid";
 import { useSnake } from "@/hooks/use-snake";
@@ -11,7 +11,7 @@ const SnakeGameContext = createContext();
 
 // Provider component to wrap the entire game and provide the game state
 export const SnakeGameProvider = ({ children }) => {
-  const { gridRef, gridDimension } = useGrid({ cols: 0, rows: 0 });
+  const { gridRef, gridDimension } = useGrid();
   const { snake, walk, growSnake } = useSnake(gridDimension);
   const { foods, placeFood, foundDigestedFood } = useFoods(snake);
 
@@ -27,7 +27,7 @@ export const SnakeGameProvider = ({ children }) => {
       value={{
         houseRef: gridRef,
         gridDimension,
-        snake,
+        snake: snake.tail,
         foods,
         placeFood,
       }}
