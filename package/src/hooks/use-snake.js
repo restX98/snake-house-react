@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import {
   getInRangeValue,
   pickRandom,
   pickWithProbabilityOf,
 } from "@/lib/utils";
 import { CHANGE_DIRECTION_PROBABILITY, Directions } from "@/lib/constants";
+import { aStarSearch } from "@/lib/a-star-search";
 
-const getNewHead = (tail, direction, gridDimension) => {
-  const head = tail.at(0);
-  switch (direction) {
+const getNewHead = (snake, gridDimension) => {
+  const head = snake.tail.at(0);
+  switch (snake.direction) {
     case "UP":
       return {
         x: head.x,
@@ -45,8 +46,10 @@ const pickRandomDirection = (direction) => {
   }
 };
 
-export function useSnake(gridDimension) {
+export function useSnake(gridDimension, digestFoodAt, foods) {
   const [snake, setSnake] = useState({
+    ns: [],
+    f_ns: false,
     direction: Directions.RIGHT,
     tail: [
       { x: 9, y: 10 },
@@ -57,25 +60,48 @@ export function useSnake(gridDimension) {
     ],
   });
 
-  const walk = () => {
+  const grid = new Array(gridDimension.rows).fill(
+    new Array(gridDimension.cols).fill(1),
+  );
+
+  const detectedFoods = useMemo(() => {
+    const det = foods.filter(
+      (f) =>
+        !snake.ns.find((s) => s.x === f.x && s.y === f.y) &&
+        !snake.tail.find((t) => t.x === f.x && t.y === f.y),
+    );
+    return det;
+  }, [snake.f_ns, foods]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const walk = ({ haveEaten }) => {
     setSnake((prevSnake) => {
+      // Calculate next steps
+      const ns = [...prevSnake.ns];
+      detectedFoods.forEach((f) => {
+        const source = ns.length > 0 ? ns.at(-1) : prevSnake.tail.at(0);
+        const path = aStarSearch(grid, source, f);
+        path && ns.push(...path);
+      });
+      const f_ns = detectedFoods.length > 0 ? !prevSnake.f_ns : prevSnake.f_ns;
+
+      // Update the direction
       const direction = pickWithProbabilityOf(CHANGE_DIRECTION_PROBABILITY)
         ? pickRandomDirection(prevSnake.direction)
         : prevSnake.direction;
-      const tail = [
-        getNewHead(prevSnake.tail, prevSnake.direction, gridDimension),
-        ...prevSnake.tail.slice(0, -1),
-      ];
+
+      // Generate the new head and tail
+      const head =
+        ns.length > 0 ? ns.shift() : getNewHead(prevSnake, gridDimension);
+      const tail = haveEaten ? prevSnake.tail : prevSnake.tail.slice(0, -1);
+
       return {
         direction,
-        tail,
+        ns,
+        f_ns,
+        tail: [head, ...tail],
       };
     });
   };
 
-  const growSnake = () => {
-    // setSnake((prevSnake) => [...prevSnake, prevSnake.at(-1)]);
-  };
-
-  return { snake, walk, growSnake };
+  return { snake: snake.tail, walk };
 }
