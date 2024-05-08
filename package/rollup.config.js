@@ -23,15 +23,11 @@ export default {
       format: "es",
       dir: `${outputDir}/esm`,
       entryFileNames: "[name].mjs",
-      preserveModules: true,
-      sourcemap: true,
     },
     {
       format: "cjs",
       dir: `${outputDir}/cjs`,
       entryFileNames: "[name].cjs",
-      preserveModules: true,
-      sourcemap: true,
     },
   ],
   external,
@@ -63,6 +59,7 @@ export default {
     rollupPluginUseClient(),
     babel({
       babelHelpers: "bundled",
+      sourceMaps: true,
       presets: [
         "@babel/preset-env",
         [
@@ -74,7 +71,6 @@ export default {
       ],
       extensions: [".js", ".jsx", ".json", "css", "mjs"],
       exclude: "node_modules/**",
-      sourceMaps: true,
     }),
     // terser(),
   ],
