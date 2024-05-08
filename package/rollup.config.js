@@ -3,7 +3,7 @@ import path from "path";
 import alias from "@rollup/plugin-alias";
 import babel from "@rollup/plugin-babel";
 import resolve from "@rollup/plugin-node-resolve";
-import terser from "@rollup/plugin-terser";
+// import terser from "@rollup/plugin-terser";
 import postcss from "rollup-plugin-postcss";
 import { rollupPluginUseClient } from "rollup-plugin-use-client";
 import { rimraf } from "rimraf";
@@ -23,12 +23,14 @@ export default {
       format: "es",
       dir: `${outputDir}/esm`,
       entryFileNames: "[name].mjs",
+      preserveModules: true,
       sourcemap: true,
     },
     {
       format: "cjs",
       dir: `${outputDir}/cjs`,
       entryFileNames: "[name].cjs",
+      preserveModules: true,
       sourcemap: true,
     },
   ],
@@ -58,6 +60,7 @@ export default {
         insertAt: "top",
       },
     }),
+    rollupPluginUseClient(),
     babel({
       babelHelpers: "bundled",
       presets: [
@@ -71,9 +74,9 @@ export default {
       ],
       extensions: [".js", ".jsx", ".json", "css", "mjs"],
       exclude: "node_modules/**",
+      sourceMaps: true,
     }),
-    rollupPluginUseClient(),
-    terser(),
+    // terser(),
   ],
   onwarn(warning, warn) {
     if (warning.code === "MODULE_LEVEL_DIRECTIVE") {
