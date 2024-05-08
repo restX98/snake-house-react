@@ -1,15 +1,14 @@
 import { useState } from "react";
 
-export function useFoods(snake) {
-  const [foods, setFoods] = useState([{ x: 10, y: 15 }]);
+export function useFoods() {
+  const [foods, setFoods] = useState([]);
 
   const placeFood = (newFood) => {
     setFoods((prevFoods) => [...prevFoods, newFood]);
   };
 
-  const foundDigestedFood = () => {
-    const tail = snake.tail.at(-1);
-    const isDigested = foods.findIndex((f) => f.x === tail.x && f.y === tail.y);
+  const digestFoodAt = ({ x, y }) => {
+    const isDigested = foods.findIndex((f) => f.x === x && f.y === y);
     if (isDigested > -1) {
       setFoods((prevFood) => prevFood.filter((_, i) => i !== isDigested));
       return true;
@@ -17,5 +16,5 @@ export function useFoods(snake) {
     return false;
   };
 
-  return { foods, placeFood, foundDigestedFood };
+  return { foods, placeFood, digestFoodAt };
 }

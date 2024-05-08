@@ -9,17 +9,17 @@ import { TIME_FRAME } from "@/lib/constants";
 
 const SnakeGameContext = createContext();
 
-// Provider component to wrap the entire game and provide the game state
 export const SnakeGameProvider = ({ children }) => {
   const { gridRef, gridDimension } = useGrid();
-  const { snake, walk, growSnake } = useSnake(gridDimension);
-  const { foods, placeFood, foundDigestedFood } = useFoods(snake);
+  const { foods, placeFood, digestFoodAt } = useFoods();
+
+  const { snake, walk } = useSnake(gridDimension, foods);
 
   useInterval(() => {
-    if (foundDigestedFood()) {
-      growSnake();
-    }
-    walk();
+    const haveEaten = digestFoodAt(snake.at(-1));
+    walk({
+      haveEaten,
+    });
   }, TIME_FRAME);
 
   return (
@@ -27,7 +27,7 @@ export const SnakeGameProvider = ({ children }) => {
       value={{
         houseRef: gridRef,
         gridDimension,
-        snake: snake.tail,
+        snake,
         foods,
         placeFood,
       }}
