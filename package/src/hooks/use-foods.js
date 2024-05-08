@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { getRandom, pickWithProbabilityOf } from "@/lib/utils";
+import { POPUP_FOOD_PROBABILITY } from "@/lib/constants";
 
-export function useFoods() {
+export function useFoods(gridDimension) {
   const [foods, setFoods] = useState([]);
 
   const placeFood = (newFood) => {
@@ -16,5 +18,14 @@ export function useFoods() {
     return false;
   };
 
-  return { foods, placeFood, digestFoodAt };
+  const popUpFood = () => {
+    if (pickWithProbabilityOf(POPUP_FOOD_PROBABILITY)) {
+      placeFood({
+        x: getRandom(0, gridDimension.cols),
+        y: getRandom(0, gridDimension.rows),
+      });
+    }
+  };
+
+  return { foods, placeFood, digestFoodAt, popUpFood };
 }
