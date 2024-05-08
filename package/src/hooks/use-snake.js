@@ -46,7 +46,7 @@ const pickRandomDirection = (direction) => {
   }
 };
 
-export function useSnake(gridDimension, digestFoodAt, foods) {
+export function useSnake(gridDimension, foods) {
   const [snake, setSnake] = useState({
     ns: [],
     f_ns: false,
@@ -60,17 +60,25 @@ export function useSnake(gridDimension, digestFoodAt, foods) {
     ],
   });
 
-  const grid = new Array(gridDimension.rows).fill(
-    new Array(gridDimension.cols).fill(1),
-  );
+  const grid = useMemo(() => {
+    const g = new Array(gridDimension.rows);
+    for (let i = 0; i < g.length; i++) {
+      g[i] = new Array(gridDimension.cols).fill(1);
+    }
+    snake.tail.slice(1).forEach((s) => {
+      if (g[s.y] && g[s.y][s.x]) {
+        g[s.y][s.x] = 0;
+      }
+    });
+    return g;
+  }, [snake.tail, gridDimension.cols, gridDimension.rows]);
 
   const detectedFoods = useMemo(() => {
-    const det = foods.filter(
+    return foods.filter(
       (f) =>
         !snake.ns.find((s) => s.x === f.x && s.y === f.y) &&
         !snake.tail.find((t) => t.x === f.x && t.y === f.y),
     );
-    return det;
   }, [snake.f_ns, foods]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const walk = ({ haveEaten }) => {

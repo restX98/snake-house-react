@@ -13,7 +13,7 @@ export const SnakeGameProvider = ({ children }) => {
   const { gridRef, gridDimension } = useGrid();
   const { foods, placeFood, digestFoodAt } = useFoods();
 
-  const { snake, walk } = useSnake(gridDimension, digestFoodAt, foods);
+  const { snake, walk } = useSnake(gridDimension, foods);
 
   useInterval(() => {
     const haveEaten = digestFoodAt(snake.at(-1));
