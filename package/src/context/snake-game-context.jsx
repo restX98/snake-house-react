@@ -11,14 +11,13 @@ const SnakeGameContext = createContext();
 
 export const SnakeGameProvider = ({ children }) => {
   const { gridRef, gridDimension } = useGrid();
-  const { foods, placeFood, digestFoodAt } = useFoods();
-
+  const { foods, placeFood, digestFoodAt, popUpFood } = useFoods(gridDimension);
   const { snake, walk } = useSnake(gridDimension, foods);
 
   useInterval(() => {
-    const haveEaten = digestFoodAt(snake.at(-1));
+    popUpFood();
     walk({
-      haveEaten,
+      haveEaten: digestFoodAt(snake.at(-1)),
     });
   }, TIME_FRAME);
 
