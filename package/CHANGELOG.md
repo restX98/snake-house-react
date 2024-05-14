@@ -4,4 +4,4 @@
 
 ### Minor Changes
 
-- 1fde50e: Changesets initialization
+- 1fde50e: Changesets initialization, added release workflow, upgrated pnpm project version
