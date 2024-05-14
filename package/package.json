@@ -4,7 +4,8 @@
   "description": "Snake House - An interactive background home of a small hungry snake",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/restX98/snake-house-react.git"
+    "url": "git+https://github.com/restX98/snake-house-react.git",
+    "directory": "package"
   },
   "author": "restX98",
   "license": "ISC",
@@ -53,5 +54,8 @@
   "dependencies": {
     "clsx": "^2.1.1",
     "tailwind-merge": "^2.3.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }
