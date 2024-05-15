@@ -17,8 +17,21 @@ jobs:
       - name: Checkout branch
         uses: actions/checkout@v4
 
-      - name: Setup
-        uses: ./.github/actions/ci-setup
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Use Node.js 21
+        uses: actions/setup-node@v4
+        with:
+          registry-url: "https://npm.pkg.github.com"
+          node-version: 21
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        shell: bash
 
       - name: Linting
         run: pnpm lint
