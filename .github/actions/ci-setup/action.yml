@@ -7,11 +7,6 @@ runs:
       with:
         version: 9
 
-    - run: |
-        echo "\n//npm.pkg.github.com/:_authToken=$NPM_TOKEN" >> .npmrc
-      env:
-        NPM_TOKEN: ${{ secrets.GB_TOKEN }}
-
     - name: Use Node.js 21
       uses: actions/setup-node@v4
       with:
