@@ -1,3 +1,5 @@
+"use client";
+
 function BoxContainer({ children }) {
   return (
     <div className="absolute left-0 top-0 size-full max-h-screen max-w-full overflow-hidden">
