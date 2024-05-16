@@ -1,22 +1,15 @@
 "use client";
 
+import { memo } from "react";
 import { useSnakeGameContext } from "@/context/snake-game-context";
 import { cn } from "@/lib/utils";
 
-function Tile({ coords }) {
-  const { snake, foods, placeFood } = useSnakeGameContext();
-
-  const isSnake = snake.some((tail) => {
-    return tail.x === coords.col && tail.y === coords.row;
-  });
-
-  const isFood = foods.some((food) => {
-    return food.x === coords.col && food.y === coords.row;
-  });
+function Tile({ col, row, isSnake, isFood }) {
+  const { placeFood } = useSnakeGameContext();
 
   const onClick = () => {
     if (isSnake || isFood) return;
-    placeFood({ x: coords.col, y: coords.row });
+    placeFood({ x: col, y: row });
   };
 
   return (
@@ -45,4 +38,13 @@ function Tile({ coords }) {
   );
 }
 
-export default Tile;
+function comparator(prevProps, nextProps) {
+  return (
+    prevProps.col === nextProps.col &&
+    prevProps.row === nextProps.row &&
+    prevProps.isSnake === nextProps.isSnake &&
+    prevProps.isFood === nextProps.isFood
+  );
+}
+
+export default memo(Tile, comparator);
