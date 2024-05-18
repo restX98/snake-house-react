@@ -1,5 +1,11 @@
 # @restx98/snake-house-react
 
+## 0.2.0
+
+### Minor Changes
+
+- 714345a: Feature-2: Snake cut his tail if it eats itself
+
 ## 0.1.2
 
 ### Patch Changes
