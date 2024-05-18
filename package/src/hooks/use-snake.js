@@ -81,7 +81,7 @@ export function useSnake(gridDimension, foods) {
     );
   }, [snake.f_ns, foods]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const walk = ({ haveEaten }) => {
+  const walk = ({ digested }) => {
     setSnake((prevSnake) => {
       // Calculate next steps
       const ns = [...prevSnake.ns];
@@ -100,7 +100,17 @@ export function useSnake(gridDimension, foods) {
       // Generate the new head and tail
       const head =
         ns.length > 0 ? ns.shift() : getNewHead(prevSnake, gridDimension);
-      const tail = haveEaten ? prevSnake.tail : prevSnake.tail.slice(0, -1);
+
+      let tail = digested ? prevSnake.tail : prevSnake.tail.slice(0, -1);
+
+      // Cut tail if snake eaten itself
+      const prevHead = prevSnake.tail.at(0);
+      const eatenItself = tail
+        .slice(1)
+        .findIndex((t) => t.x === prevHead.x && t.y === prevHead.y);
+      if (eatenItself > 0) {
+        tail = tail.slice(0, eatenItself - 1);
+      }
 
       return {
         direction,
