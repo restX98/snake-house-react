@@ -17,7 +17,7 @@ export const SnakeGameProvider = ({ children }) => {
   useInterval(() => {
     popUpFood();
     walk({
-      haveEaten: digestFoodAt(snake.at(-1)),
+      digested: digestFoodAt(snake.at(-1)),
     });
   }, TIME_FRAME);
 
