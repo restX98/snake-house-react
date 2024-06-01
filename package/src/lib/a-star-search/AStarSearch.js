@@ -141,14 +141,7 @@ export default class AStarSearch {
   }
 
   isBlocked(x, y) {
-    try {
-      return this.grid[y][x] === 0;
-    } catch (ex) {
-      console.log("Grid: ", this.grid);
-      console.log("Grid[x]: ", this.grid[x]);
-      console.log("Grid[x][y]: ", this.grid[x][y]);
-      throw new Error();
-    }
+    return this.grid[y][x] === 0;
   }
 
   isProcessed(x, y) {
