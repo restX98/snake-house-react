@@ -5,7 +5,7 @@ import {
   pickWithProbabilityOf,
 } from "@/lib/utils";
 import { CHANGE_DIRECTION_PROBABILITY, Directions } from "@/lib/constants";
-import { aStarSearch } from "@/lib/a-star-search";
+import AStarSearch from "@/lib/a-star-search";
 
 const getNewHead = (snake, gridDimension) => {
   const head = snake.tail.at(0);
@@ -87,7 +87,7 @@ export function useSnake(gridDimension, foods) {
       const ns = [...prevSnake.ns];
       detectedFoods.forEach((f) => {
         const source = ns.length > 0 ? ns.at(-1) : prevSnake.tail.at(0);
-        const path = aStarSearch(grid, source, f);
+        const path = new AStarSearch(grid, source, f).find();
         path && ns.push(...path);
       });
       const f_ns = detectedFoods.length > 0 ? !prevSnake.f_ns : prevSnake.f_ns;
