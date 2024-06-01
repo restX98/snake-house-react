@@ -17,8 +17,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.variable}>
         <SnakeGameProvider>
-          <main className="flex max-h-screen min-h-screen flex-col overflow-hidden bg-zinc-800">
-            <SnakeHouse className="relative flex-auto">{children}</SnakeHouse>
+          <main className="fixed inset-0 h-dvh w-screen">
+            <SnakeHouse>{children}</SnakeHouse>
           </main>
         </SnakeGameProvider>
       </body>

@@ -22,7 +22,7 @@ function Grid({ className }) {
   return (
     <div
       ref={houseRef}
-      className={cn(className, "flex flex-col justify-evenly")}
+      className={cn(className, "flex size-full flex-col justify-evenly")}
     >
       {_rows.map((row) => (
         <div key={row} className="flex w-screen justify-evenly">
