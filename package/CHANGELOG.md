@@ -1,5 +1,11 @@
 # @restx98/snake-house-react
 
+## 0.3.0
+
+### Minor Changes
+
+- 1681ae4: Feature-5: Improve Snake search algorithm - Rewriting AStarSearch script using JS Class
+
 ## 0.2.1
 
 ### Patch Changes
