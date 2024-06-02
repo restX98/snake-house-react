@@ -1,5 +1,11 @@
 # @restx98/snake-house-react
 
+## 0.4.0
+
+### Minor Changes
+
+- 76b9e1c: FEATURE-6: Allow BoxContainer className customization
+
 ## 0.3.0
 
 ### Minor Changes
